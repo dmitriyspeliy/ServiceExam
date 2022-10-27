@@ -9,11 +9,13 @@ import ru.sky.pro.courseWork2.ServiceExam.entity.Question;
 import ru.sky.pro.courseWork2.ServiceExam.service.QuestionService;
 
 import java.util.Collection;
+import java.util.List;
 
 @RestController
 @RequestMapping("/exam/math")
 public class MathQuestionController {
     private final QuestionService mathQuestionService;
+
 
     public MathQuestionController(@Qualifier("mathQuestionService") QuestionService javaService) {
         this.mathQuestionService = javaService;

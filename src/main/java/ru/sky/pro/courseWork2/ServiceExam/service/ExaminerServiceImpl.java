@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import ru.sky.pro.courseWork2.ServiceExam.entity.Question;
 
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Service
 @Getter
@@ -14,6 +15,8 @@ public class ExaminerServiceImpl implements ExaminerService {
 
     private final List<QuestionService> questionServices;
     private final Set<Question> questions = new HashSet<>();
+
+    private final static ThreadLocalRandom random = ThreadLocalRandom.current();
 
     @Autowired
     public ExaminerServiceImpl(List<QuestionService> questionServices) {
@@ -32,8 +35,7 @@ public class ExaminerServiceImpl implements ExaminerService {
     }
 
     public static int randInt(int min, int max) {
-        Random rand = new Random();
-        return rand.nextInt((max - min) + 1) + min;
+        return random.nextInt((max - min) + 1) + min;
     }
 
 }

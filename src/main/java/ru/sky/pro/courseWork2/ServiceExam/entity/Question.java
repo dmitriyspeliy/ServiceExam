@@ -7,6 +7,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class Question {
-    String question;
-    String answer;
+    private String question;
+    private String answer;
 }

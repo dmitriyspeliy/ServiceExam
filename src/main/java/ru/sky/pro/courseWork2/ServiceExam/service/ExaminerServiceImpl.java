@@ -23,9 +23,10 @@ public class ExaminerServiceImpl implements ExaminerService {
     @Override
     public Collection<Question> getQuestion() {
         if (!questions.isEmpty()) questions.clear();
-        for (int i = 0; i < randInt(1, questionServices.get(0).getAll().size()); i++) {
-            questions.add(questionServices.get(1).getRandomQuestion());
-            questions.add(questionServices.get(0).getRandomQuestion());
+        int count = questionServices.get(0).getAll().size();
+        int beanIndex = randInt(0,questionServices.size() - 1);
+        while (questions.size() <= count){
+            questions.add(questionServices.get(beanIndex).getRandomQuestion());
         }
         return questions;
     }

@@ -11,9 +11,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import static ru.sky.pro.courseWork2.ServiceExam.utils.Utils.randInt;
+
 @Service
 @Order(2)
 public class MathQuestionService implements QuestionService {
+
+    private static final List<String> operations = List.of("/", "*", "+", "-");
 
     @Override
     public Question add(String question, String answer) {
@@ -42,29 +46,21 @@ public class MathQuestionService implements QuestionService {
 
     @Override
     public Question getRandomQuestion() {
-        List<String> arr = List.of("/", "*", "+", "-");
-        String action = arr.get(randInt(0,arr.size() - 1));
+        String action = operations.get(randInt(0,operations.size() - 1));
         int intFirst = randInt(0,10);
         int intSecond = randInt(1,10);
         String process = intFirst + " " + action + " " + intSecond;
         String question = process + " = ?";
         int answer = 0;
-        if (process.contains("+")) {
-            answer = intFirst + intSecond;
-        } else if (process.contains("-")) {
-            answer = intFirst - intSecond;
-        } else if (process.contains("*")) {
-            answer = intFirst * intSecond;
-        } else {
-            answer = intFirst / intSecond;
+        switch (action) {
+            case "+" -> answer = intFirst + intSecond;
+            case "-" -> answer = intFirst - intSecond;
+            case "*" -> answer = intFirst * intSecond;
+            case "/" -> answer = intFirst / intSecond;
         }
         return new Question(question, String.valueOf(answer));
     }
 
-    public static int randInt(int min, int max) {
-        Random rand = new Random();
-        return rand.nextInt((max - min) + 1) + min;
-    }
 
 }
 
